@@ -7,3 +7,4 @@ relative_links:
 include:
  - README.md
  - Fish.md
+markdown: GFM
