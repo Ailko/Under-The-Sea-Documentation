@@ -9,6 +9,7 @@ The schools of fish are split up in 3 seperates scripts:
 
 ### Variables
 | Variable | Explanation |
+
 | :--- | :--- |
 | `GameObject[] fishVariations`	| This is an array of all the different models of fish allow in this school. |
 | `float minSpeed` | Relative minimum speed a fish is allowed to have in this school. |
@@ -116,6 +117,7 @@ After this we set the speed to a random number between the minSpeed and maxSpeed
 ## SchoolFishScript.cs
 ### Variables
 | Variable | Explanation |
+
 | :--- | :--- |
 | `float speed` | This variable determines the maximal speed a fish can have relative to the school. |
 | `float rotSpeed` | This variable determines how fast a fish can turn. |
