@@ -19,3 +19,75 @@ The schools of fish are split up in 3 seperates scripts:
 | `string fishScript` | The script for the fishes in this school. By default this will be set to the standard script. |
 | `float schoolRadius` | The maximum distance away from the center of the school a fish is allowed to swim. |
 | `int schoolSize` | The amount of fish in this school. |
+
+### Methods
+#### Start
+The private `Start()` method consists of two parts:
+- The creation
+- The variable setting
+
+
+We will be discussing both.
+
+
+First, the creation:
+This part of the `School.cs` script will create the fishes.
+Here's the code:
+```csharp
+for(int i = 0; i < schoolSize; i++)
+{
+	int variation = Random.Range(0, fishVariations.Length);
+	Instantiate
+	(
+		fishVariations[variation],
+		transform.position + new Vector3
+		(
+			Random.Range(-1f, 1f),
+			Random.Range(-1f, 1f),
+			Random.Range(-1f, 1f)
+		).normalized * Random.Range(0.0f, schoolRadius),
+		Quaternion.Euler(transform.rotation.eulerAngles + Quaternion.Euler(0, -90, 0).eulerAngles),
+		transform
+	);
+}
+```
+
+
+It will select a fish variation at rando and instantiate this with the Unity `Instantiate<GameObject>(GameObject original, Vector3 position, Quaternion 
+rotation, Transform parent)` method. We will cover each variable of the `Instantiate` function:
+- `GameObject original`: Here the randomly selected fish variation is passed.
+- `Vector3 position`: The worlposition is a random position relative to the school inside the radius. This is achieved by ading a Vector3 with x, y and z 
+coordinates randomly selected between 0 and 1. This Vector3 is then normalized and multiplied with the radius to keep it inbounds and upscaled as large as is 
+necessary.
+- `Quaternion rotation`: The rotation at initialisation is the same for all the fishess, straight ahead.
+- `Transform parent`: As the parent the School's transform is passed.
+
+
+The second part of the `Start()` method is used for assigning variables to the SchoolFishScript. It looks a bit daunting but it will be much clearer after 
+the explanation.
+
+
+The code:
+```csharp
+for(int i = 0; i < transform.childCount; i++)
+{
+	if (!transform.GetChild(i).GetComponent<Camera>())
+	{
+		try
+		{
+			System.Type type = System.Type.GetType(fishScript);
+			if (type.IsSubclassOf(typeof(SchoolFishScript)))
+				transform.GetChild(i).gameObject.AddComponent(type.GetType());
+			else
+				transform.GetChild(i).gameObject.AddComponent<SchoolFishScript>();
+		}
+		catch (System.Exception)
+		{
+			transform.GetChild(i).gameObject.AddComponent<SchoolFishScript>();
+		}
+		transform.GetChild(i).gameObject.transform.localScale *= Random.Range(1 - scaleVariance, 1 + scaleVariance);
+		transform.GetChild(i).gameObject.GetComponent<SchoolFishScript>().speed = Random.Range(minSpeed, maxSpeed);
+		transform.GetChild(i).gameObject.GetComponent<SchoolFishScript>().rotSpeed = Random.Range(minRotSpeed, maxRotSpeed);
+	}
+}
+```
