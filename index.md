@@ -5,5 +5,5 @@
 - Thomas Ghys
 
 ## Summary
-1. [Index](https://ailko.github.io/Under-The-Sea-Documentation/)
+1. [Index](/index.md)
 2. [Fish](/Fish.md)
