@@ -8,17 +8,17 @@ The schools of fish are split up in 3 seperates scripts:
 ## School.cs
 
 ### Variables
-Variable | Explanation 
-:--- | :--- 
-GameObject[] fishVariations	| This is an array of all the different models of fish allow in this school. 
-float minSpeed | Relative minimum speed a fish is allowed to have in this school. 
-float maxSpeed | Relative maximum speed a fish is allowed to have in this school. 
-float minRotSpeed | Minimum rotation speed a fish is allowed to have in this school. 
-float maxRotSpeed | Maximum rotation speed a fish is allowed to have in this school. 
-float scaleVariance | The variance in size the fish models are allowed to have. 
-string fishScript | The script for the fishes in this school. By default this will be set to the standard script. 
-float schoolRadius | The maximum distance away from the center of the school a fish is allowed to swim. 
-int schoolSize | The amount of fish in this school. 
+| Variable | Explanation |
+| :--- | :--- |
+| `GameObject[] fishVariations`	| This is an array of all the different models of fish allow in this school. |
+| `float minSpeed` | Relative minimum speed a fish is allowed to have in this school. |
+| `float maxSpeed` | Relative maximum speed a fish is allowed to have in this school. |
+| `float minRotSpeed` | Minimum rotation speed a fish is allowed to have in this school. |
+| `float maxRotSpeed` | Maximum rotation speed a fish is allowed to have in this school. |
+| `float scaleVariance` | The variance in size the fish models are allowed to have. |
+| `string fishScript` | The script for the fishes in this school. By default this will be set to the standard script. |
+| `float schoolRadius` | The maximum distance away from the center of the school a fish is allowed to swim. |
+| `int schoolSize` | The amount of fish in this school. |
 
 ### Methods
 
@@ -115,14 +115,15 @@ After this we set the speed to a random number between the minSpeed and maxSpeed
 
 ## SchoolFishScript.cs
 ### Variables
-Variable | Explanation 
-:--- | :--- 
-`float speed` | This variable determines the maximal speed a fish can have relative to the school. 
-`float rotSpeed` | This variable determines how fast a fish can turn. 
-`float moveTimeOut` | This variable determines how long a fish goes in timeout when they exit the allowed radius 
-`float timer` | This variable is used when a fish enters timeout 
-`Vector3 target` | This variable is the position the fish tries to swim towards. 
-`Vector3 direction` | This variable tracks what direction the fish is moving in. 
+
+| Variable | Explanation |
+| :--- | :--- |
+| `float speed` | This variable determines the maximal speed a fish can have relative to the school. |
+| `float rotSpeed` | This variable determines how fast a fish can turn. |
+| `float moveTimeOut` | This variable determines how long a fish goes in timeout when they exit the allowed radius. |
+| `float timer` | This variable is used when a fish enters timeout. |
+| `Vector3 target` | This variable is the position the fish tries to swim towards. |
+| `Vector3 direction` | This variable tracks what direction the fish is moving in. |
 
 ### Methods
 
