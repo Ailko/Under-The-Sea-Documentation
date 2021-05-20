@@ -6,4 +6,4 @@
 
 ## Summary
 1. [Index](/index.md)
-2. [Fish](/Fish.md)
+2. [Schools](/Schools.md)
