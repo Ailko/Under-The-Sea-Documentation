@@ -8,7 +8,7 @@ The schools of fish are split up in 3 seperates scripts:
 ## School.cs
 
 ### Variables
-| --- | --- |
+
 | Variable | Explanation |
 | :--- | :--- |
 | `GameObject[] fishVariations`	| This is an array of all the different models of fish allow in this school. |
