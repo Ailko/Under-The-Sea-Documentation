@@ -31,7 +31,11 @@ We will be discussing both.
 
 
 First, the creation:
+
+
 This part of the `School.cs` script will create the fishes.
+
+
 Here's the code:
 ```csharp
 for(int i = 0; i < schoolSize; i++)
@@ -53,14 +57,14 @@ for(int i = 0; i < schoolSize; i++)
 ```
 
 
-It will select a fish variation at rando and instantiate this with the Unity `Instantiate<GameObject>(GameObject original, Vector3 position, Quaternion 
+It will select a fish variation at random and instantiate this with the Unity `Instantiate<GameObject>(GameObject original, Vector3 position, Quaternion 
 rotation, Transform parent)` method. We will cover each variable of the `Instantiate` function:
 - `GameObject original`: Here the randomly selected fish variation is passed.
-- `Vector3 position`: The worlposition is a random position relative to the school inside the radius. This is achieved by ading a Vector3 with x, y and z 
+- `Vector3 position`: The worlposition is a random position relative to the school inside the radius. This is achieved by creating a Vector3 with x, y and z 
 coordinates randomly selected between 0 and 1. This Vector3 is then normalized and multiplied with the radius to keep it inbounds and upscaled as large as is 
-necessary.
-- `Quaternion rotation`: The rotation at initialisation is the same for all the fishess, straight ahead.
-- `Transform parent`: As the parent the School's transform is passed.
+necessary to fill the radius. This is then added to the school's position.
+- `Quaternion rotation`: The rotation at initialisation is the same for all the fishes, straight ahead.
+- `Transform parent`: As the parent the school's transform is passed.
 
 
 The second part of the `Start()` method is used for assigning variables to the SchoolFishScript. It looks a bit daunting but it will be much clearer after 
@@ -79,7 +83,7 @@ for(int i = 0; i < transform.childCount; i++)
 			if (type.IsSubclassOf(typeof(SchoolFishScript)))
 				transform.GetChild(i).gameObject.AddComponent(type.GetType());
 			else
-				transform.GetChild(i).gameObject.AddComponent<SchoolFishScript>();
+				throw new System.Exception("Wrong script type");
 		}
 		catch (System.Exception)
 		{
@@ -91,3 +95,16 @@ for(int i = 0; i < transform.childCount; i++)
 	}
 }
 ```
+
+
+Since there is a possiblity of adding cameras as children of schools of fish for cinematics we check if the child is a camera, if it isn't we continue.
+
+
+First we try to get a script with the entered name. If this fails the default script is applied. If a script with that name exists we check if it is a 
+subclass of the base SchoolFishScript, once again, if this fails, the base script is applied. If none of the checks fail the script is added as a component 
+to the fish GameObject.
+
+
+Then we decide the scale of the fish by multiplying it with a random number between 1 - the determined scalevariance and 1 + the determined scale variance.
+
+After this we set the speed to a random number between the minSpeed and maxSpeed and the same principle is applied to the rotational speed.
