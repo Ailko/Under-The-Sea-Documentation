@@ -1,9 +1,9 @@
 # School
 
 The schools of fish are split up in 3 seperates scripts:
-- WaypointProgressTracker.cs from the standard assets of Unity (which we won't discuss here).
-- School.cs, which is used for the parent object grouping the fish together.
-- SchoolFishScript.cs which is used for the fish themselves.
+- `WaypointProgressTracker.cs` from the standard assets of Unity (which we won't discuss here).
+- `School.cs`, which is used for the parent object grouping the fish together.
+- `SchoolFishScript.cs`, which is used for the fish themselves.
 
 ## School.cs
 
