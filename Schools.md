@@ -119,7 +119,6 @@ After this we set the speed to a random number between the minSpeed and maxSpeed
 
 | Variable | Explanation |
 | :--- | :--- |
-
 | `float speed` | This variable determines the maximal speed a fish can have relative to the school. |
 | `float rotSpeed` | This variable determines how fast a fish can turn. |
 | `float moveTimeOut` | This variable determines how long a fish goes in timeout when they exit the allowed radius. |
