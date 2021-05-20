@@ -8,6 +8,7 @@ The schools of fish are split up in 3 seperates scripts:
 ## School.cs
 
 ### Variables
+
 | Variable | Explanation |
 
 | :--- | :--- |
@@ -116,13 +117,14 @@ After this we set the speed to a random number between the minSpeed and maxSpeed
 
 ## SchoolFishScript.cs
 ### Variables
+
 | Variable | Explanation |
 
 | :--- | :--- |
 | `float speed` | This variable determines the maximal speed a fish can have relative to the school. |
 | `float rotSpeed` | This variable determines how fast a fish can turn. |
-| `float moveTimeOut` | This variable determines how long a fish goes in timeout when they exit the allowed radius |
-| `float timer` | This variable is used when a fish enters timeout |
+| `float moveTimeOut` | This variable determines how long a fish goes in timeout when they exit the allowed radius. |
+| `float timer` | This variable is used when a fish enters timeout. |
 | `Vector3 target` | This variable is the position the fish tries to swim towards. |
 | `Vector3 direction` | This variable tracks what direction the fish is moving in. |
 
