@@ -8,21 +8,14 @@ The schools of fish are split up in 3 seperates scripts:
 ## School.cs
 
 ### Variables
-- `GameObject[] fishVariations`
-	This is an array of all the different models of fish allow in this school.
-- `float minSpeed`
-	Relative minimum speed a fish is allowed to have in this school.
-- `float maxSpeed`
-	Relative maximum speed a fish is allowed to have in this school.
-- `float minRotSpeed`
-	Minimum rotation speed a fish is allowed to have in this school.
-- `float maxRotSpeed`
-	Maximum rotation speed a fish is allowed to have in this school.
-- `float scaleVariance`
-	The variance in size the fish models are allowed to have.
-- `string fishScript = "SchoolFishScript"`
-	The script for the fishes in this school. By default this will be set to the standard script.
-- `float schoolRadius`
-	The maximum distance away from the center of the school a fish is allowed to swim.
-- `int schoolSize`
-	The amount of fish in this school.
+| Variables | Explanation |
+| :--- | :--- |
+| `GameObject[] fishVariations`	| This is an array of all the different models of fish allow in this school. |
+| `float minSpeed` | Relative minimum speed a fish is allowed to have in this school. |
+| `float maxSpeed` | Relative maximum speed a fish is allowed to have in this school. |
+| `float minRotSpeed` | Minimum rotation speed a fish is allowed to have in this school. |
+| `float maxRotSpeed` | Maximum rotation speed a fish is allowed to have in this school. |
+| `float scaleVariance` | The variance in size the fish models are allowed to have. |
+| `string fishScript` | The script for the fishes in this school. By default this will be set to the standard script. |
+| `float schoolRadius` | The maximum distance away from the center of the school a fish is allowed to swim. |
+| `int schoolSize` | The amount of fish in this school. |
