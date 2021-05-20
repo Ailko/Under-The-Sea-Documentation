@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Under The Sea: Documentation
 
 You can use the [editor on GitHub](https://github.com/Ailko/Under-The-Sea-Documentation/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
