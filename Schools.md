@@ -105,6 +105,6 @@ subclass of the base SchoolFishScript, once again, if this fails, the base scrip
 to the fish GameObject.
 
 
-Then we decide the scale of the fish by multiplying it with a random number between 1 - the determined scalevariance and 1 + the determined scale variance.
+Then we decide the scale of the fish by multiplying it with a random number between 1 - the determined scale variance and 1 + the determined scale variance.
 
 After this we set the speed to a random number between the minSpeed and maxSpeed and the same principle is applied to the rotational speed.
