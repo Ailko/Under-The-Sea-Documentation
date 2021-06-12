@@ -286,5 +286,5 @@ if (transform.localPosition.magnitude > GetComponentInParent<School>().schoolRad
 
 | Previous | Next |
 
-| :---: | :---: |
+| :--- | ---: |
 | [Main](/index.md) | [Player Controls](/PlayerControls.md) |
