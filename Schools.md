@@ -1,6 +1,6 @@
 [Back to main](/index.md)
 
-# School
+# Schools
 
 The schools of fish are split up in 3 seperates scripts:
 - `WaypointProgressTracker.cs` from the standard assets of Unity (which we won't discuss here).
