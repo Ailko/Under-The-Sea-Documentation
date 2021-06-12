@@ -12,9 +12,9 @@ The player's controls are a relatively simple script, it only has 2 methods:
 | Variable | Explanation |
 
 | :--- | :--- |
-| `Hsensitivity` | The horizontal sensitivity of the mouse. |
-| `Vsensitivity` | The vertical sensitivity of the mouse. |
-| `thrust` | The thrust power the submarine has. |
+| `float Hsensitivity` | The horizontal sensitivity of the mouse. |
+| `float Vsensitivity` | The vertical sensitivity of the mouse. |
+| `float thrust` | The thrust power the submarine has. |
 
 ### Methods
 
