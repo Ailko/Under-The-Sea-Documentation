@@ -16,3 +16,7 @@
 | Standard Assets | https://assetstore.unity.com/publishers/1 | Used the WaypointCircuit.cs and WaypointProgressTracker.cs for the fished |
 | Underwater life deluxe | https://assetstore.unity.com/packages/3d/characters/animals/fish/underwater-life-deluxe-115733 | Used the fish prefabs |
 | 24 PBR Materials | https://assetstore.unity.com/packages/2d/textures-materials/24-pbr-materials-for-unity-5-51991 | Used the mud texture for the terrain |
+
+### Music
+
+The little mermaid (soundtrack): copied the music from the cd and inserted it into the project.
