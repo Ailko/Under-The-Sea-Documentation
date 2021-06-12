@@ -9,6 +9,7 @@ The player's controls are a relatively simple script, it only has 2 methods:
 ## PlayerMovement.cs
 
 ### Variables
+
 | Variable | Explanation |
 
 | :--- | :--- |
