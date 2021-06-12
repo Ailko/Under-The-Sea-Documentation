@@ -281,3 +281,5 @@ All the way at the end of the file a last check for being outside the school is 
 if (transform.localPosition.magnitude > GetComponentInParent<School>().schoolRadius)
 	transform.localPosition = transform.localPosition.normalized * GetComponentInParent<School>().schoolRadius;
 ```
+
+[Back to main](./index.md)
