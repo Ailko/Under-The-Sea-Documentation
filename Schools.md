@@ -285,4 +285,4 @@ if (transform.localPosition.magnitude > GetComponentInParent<School>().schoolRad
 [Back to main](/index.md)
 
 
-< [Main](/index.md)		[Player Controls](/PlayerControls.md) >
+<<< [Main](/index.md) <<<  >>> [Player Controls](/PlayerControls.md) >>>
