@@ -250,3 +250,95 @@ The `SetSFXVolume()` method sets the volume of the song depending on the value i
 ```csharp
         MainMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
 ```
+
+## MenuMaster
+### ButtonHandler.cs
+#### Variables
+| Variable | Explanation |
+
+| :--- | :--- |
+| `GameObject MenuPanel` | The menu panel. |
+| `GameObject CreditsPanel` | The credits panel. |
+| `GameObject MusicPanel` | The music panel. |
+| `Button MusicPauseButton` | The pause music button. |
+| `Sprite Paused` | The paused sprite. |
+| `Sprite Playing` | The playing sprite. |
+| `Text MusicTitle` | The name of the song that is currently playing. |
+| `AudioManager AudioMaster` | The Audiomanager in the scene. |
+
+#### Methods
+##### Awake
+The `Awake()` method calls the connects the audiomaster to the buttonhandler:
+```csharp
+        AudioMaster = GameObject.Find("AudioMaster").GetComponent<AudioManager>();
+```
+
+##### Update
+The `Update()` method updates the text of the song that is playing:
+```csharp
+        MusicTitle.text = AudioMaster.GetSongText();
+```
+
+##### LoadScene
+The `LoadScene()` method loads in a new scene:
+```csharp
+        SceneManager.LoadScene(scene);
+```
+
+##### ToggleMenuPanels
+The `ToggleMenuPanels()` method toggles the corresponding panel:
+```csharp
+        switch (panel)
+        {
+            case "credits":
+                MenuPanel.SetActive(false);
+                CreditsPanel.SetActive(true);
+                AchievementManager.instance.Unlock("credits");
+                break;
+            case "menu":
+                SceneManager.LoadScene("MainMenu");
+                break;
+            case "music":
+                MusicPanel.SetActive(!MusicPanel.activeSelf);
+                AchievementManager.instance.Unlock("volume");
+                break;
+            default:
+                break;
+        }
+```
+
+##### QuitGame
+The `QuitGame()` method quits the game:
+```csharp
+        Application.Quit();
+```
+
+##### NextSong
+The `NextSong()` method calls the right methods from the audiomaster to simplify the User experience:
+```csharp
+        AudioMaster.UpdateSoundtrack();
+        AudioMaster.NextSong();
+```
+
+##### PreviousSong
+The `PreviousSong()` method calls the right methods from the audiomaster to simplify the User experience:
+```csharp
+        AudioMaster.UpdateSoundtrack();
+        AudioMaster.PreviousSong();
+```
+
+##### Pause
+The `Pause()` method calls the right methods from the audiomaster to simplify the User experience:
+```csharp
+        bool temp = AudioMaster.IsPaused();
+        if (temp)
+        {
+            MusicPauseButton.image.sprite = Paused;
+        }
+        else
+        {
+            MusicPauseButton.image.sprite = Playing;
+        }
+        AudioMaster.Pause();
+```
+
