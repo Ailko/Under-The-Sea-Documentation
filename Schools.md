@@ -282,4 +282,4 @@ if (transform.localPosition.magnitude > GetComponentInParent<School>().schoolRad
 	transform.localPosition = transform.localPosition.normalized * GetComponentInParent<School>().schoolRadius;
 ```
 
-[Back to main](./index.md)
+[Back to main](/index.md)
