@@ -1,3 +1,5 @@
+[Back to main](/index.md)
+
 # User Interface
 
 The UI functionality consists of multiple scripts that work together to create a fluent User experience
@@ -412,3 +414,5 @@ The `SetSFXVolume()` method calls the corresponding function on the audiomanager
 ```csharp
         AudioMaster.SetSFXVolume(volume);
 ```
+
+[Back to main](/index.md)
