@@ -10,6 +10,7 @@ The schools of fish are split up in 3 seperates scripts:
 ### Variables
 
 | Variable | Explanation |
+
 | :--- | :--- |
 | `GameObject[] fishVariations`	| This is an array of all the different models of fish allow in this school. |
 | `float minSpeed` | Relative minimum speed a fish is allowed to have in this school. |
@@ -118,6 +119,7 @@ After this we set the speed to a random number between the minSpeed and maxSpeed
 ### Variables
 
 | Variable | Explanation |
+
 | :--- | :--- |
 | `float speed` | This variable determines the maximal speed a fish can have relative to the school. |
 | `float rotSpeed` | This variable determines how fast a fish can turn. |
@@ -279,3 +281,10 @@ All the way at the end of the file a last check for being outside the school is 
 if (transform.localPosition.magnitude > GetComponentInParent<School>().schoolRadius)
 	transform.localPosition = transform.localPosition.normalized * GetComponentInParent<School>().schoolRadius;
 ```
+
+[Back to main](/index.md)
+
+| Previous | Next |
+
+| :---: | :---: |
+| [Main](/index.md) | [Player Controls](/PlayerControls.md) |
