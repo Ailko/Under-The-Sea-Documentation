@@ -417,4 +417,4 @@ The `SetSFXVolume()` method calls the corresponding function on the audiomanager
 
 [Back to main](/index.md)
 
-<< [Player Controls](/PlayerControls.md) << >> [UI](/Assets.md) >>
+<< [Player Controls](/PlayerControls.md) << >> [Assets used](/Assets.md) >>
