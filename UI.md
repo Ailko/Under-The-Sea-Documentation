@@ -1,5 +1,3 @@
-[Back to main](/index.md)
-
 # User Interface
 
 The UI functionality consists of multiple scripts that work together to create a fluent User experience
@@ -342,3 +340,75 @@ The `Pause()` method calls the right methods from the audiomaster to simplify th
         AudioMaster.Pause();
 ```
 
+### SequenceAnimator.cs
+#### Variables
+| Variable | Explanation |
+
+| :--- | :--- |
+| `GameObject AnimationContainer` | The container that encompases all animated items. |
+| `List<Animator> Animators` | The list of animated items. |
+
+#### Methods
+##### Start
+The `Start()` method initialises the title animation:
+```csharp
+        Animators = new List<Animator>(AnimationContainer.GetComponentsInChildren<Animator>());
+
+        StartCoroutine(DoAnimation());
+```
+
+##### DoAnimation
+The `DoAnimation()` method animates each letter independently in sequence:
+```csharp
+        while (true)
+        {
+            foreach (var animator in Animators)
+            {
+                animator.SetTrigger("DoAnimation");
+                yield return new WaitForSeconds(1f);
+            }
+
+            yield return new WaitForSeconds(3f);
+        }
+```
+
+### SliderHandler.cs
+#### Variables
+| Variable | Explanation |
+
+| :--- | :--- |
+| `AudioManager AudioMaster` | The audiomanager. |
+| `Slider Music` | The music slider. |
+| `Slider SFX` | The sfx slider. |
+
+#### Methods
+##### Awake
+The `Awake()` method initialises the title animation:
+```csharp
+        AudioMaster = GameObject.Find("AudioMaster").GetComponent<AudioManager>();
+
+        UpdateSlider();
+```
+
+##### UpdateSlider
+The `UpdateSlider()` method sets the slidervalues to their correct position corresponding to the value it gains from the mixer. Due to the mixer being logaritmical and the sliders being linear a small correction is needed before setting the value:
+```csharp
+        float tempVolume;
+
+        AudioMaster.MainMixer.GetFloat("MusicVolume", out tempVolume);
+        Music.value = Mathf.Pow(10, (tempVolume / 20));
+        AudioMaster.MainMixer.GetFloat("SFXVolume", out tempVolume);
+        SFX.value = Mathf.Pow(10, (tempVolume / 20));
+```
+
+##### SetMusicVolume
+The `SetMusicVolume()` method calls the corresponding function on the audiomanager:
+```csharp
+        AudioMaster.SetMusicVolume(volume);
+```
+
+##### SetSFXVolume
+The `SetSFXVolume()` method calls the corresponding function on the audiomanager:
+```csharp
+        AudioMaster.SetSFXVolume(volume);
+```
