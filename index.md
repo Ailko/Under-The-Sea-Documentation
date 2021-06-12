@@ -7,3 +7,4 @@
 ## Summary
 1. [Index](/index.md)
 2. [Schools](/Schools.md)
+3. [Player Controls](/PlayerControls.md)
