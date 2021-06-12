@@ -74,5 +74,5 @@ The movement simply takes the input axises and multiplies them by the submarine'
 
 | Previous | Next |
 
-| :--- | ---: |
+| :--- | :--- |
 | [School](/Schools.md) | |
