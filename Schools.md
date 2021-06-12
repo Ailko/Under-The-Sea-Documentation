@@ -1,3 +1,5 @@
+[Back to main](/index.md)
+
 # School
 
 The schools of fish are split up in 3 seperates scripts:
