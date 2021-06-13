@@ -31,21 +31,26 @@ The `Update()` method exists out of 2 parts, the rotation and the movement. Firs
 ```csharp
 void Update()
 {
-    float yaw = transform.eulerAngles.y + Input.GetAxis("Mouse X") * Hsensitivity;
-    float pitch = transform.eulerAngles.x - Input.GetAxis("Mouse Y") * Vsensitivity;
+    if (!AchievementManager.instance.GetComponent<AchievenmentListIngame>().MenuOpen && !GameObject.Find("GameMaster").GetComponent<UserInterface>().MenuOpen)
+    {
+        float yaw = transform.eulerAngles.y + Input.GetAxis("Mouse X") * Hsensitivity;
+        float pitch = transform.eulerAngles.x - Input.GetAxis("Mouse Y") * Vsensitivity;
 
-    transform.eulerAngles = new Vector3(pitch, yaw, 0f);
+        transform.eulerAngles = new Vector3(pitch, yaw, 0f);
 
-    Vector3 movement = Vector3.zero;
+        Vector3 movement = Vector3.zero;
 
-    movement += transform.forward * Input.GetAxis("Vertical");
-    movement += transform.right * Input.GetAxis("Horizontal");
-    movement += transform.up * Input.GetAxis("Jump");
-    movement -= transform.up * Input.GetAxis("Fire1");
+        movement += transform.forward * Input.GetAxis("Vertical");
+        movement += transform.right * Input.GetAxis("Horizontal");
+        movement += transform.up * Input.GetAxis("Jump");
+        movement -= transform.up * Input.GetAxis("Fire1");
 
-    GetComponent<Rigidbody>().AddForce(movement * thrust);
+        GetComponent<Rigidbody>().AddForce(movement * thrust);
+    }
 }
 ```
+
+First a check is performed to see if the player is in the achievement or pause screen, if this is the case, no inputs will be processed.
 
 ##### Rotation
 Code:
