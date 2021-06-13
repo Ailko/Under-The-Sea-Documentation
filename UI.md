@@ -415,6 +415,89 @@ The `SetSFXVolume()` method calls the corresponding function on the audiomanager
         AudioMaster.SetSFXVolume(volume);
 ```
 
+## UserInterface
+### UserInterface.cs
+#### Variables
+| Variable | Explanation |
+
+| :--- | :--- |
+| `GameObject Menu` | The menu panel. |
+| `bool MenuOpen` | Whether or not the menu is open. |
+| `KeyCode OpenMenuKey` | The key that opens the menu. |
+
+#### Methods
+This simple class opens and closes the given panel at the press of a key that can be selected in the inspector:
+```csharp
+    public void CloseWindow()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        MenuOpen = false;
+        Menu.SetActive(MenuOpen);
+    }
+
+    public void OpenWindow()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        MenuOpen = true;
+        Menu.SetActive(MenuOpen);
+    }
+
+    public void ToggleWindow()
+    {
+        if (MenuOpen)
+        {
+            CloseWindow();
+        }
+        else
+        {
+            OpenWindow();
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(OpenMenuKey))
+        {
+            ToggleWindow();
+        }
+    }
+```
+
+## Grid populator
+### GridPopulator.cs
+#### Variables
+| Variable | Explanation |
+
+| :--- | :--- |
+| `GameObject Grid` | The Grid. |
+| `RawImage GridItem` | The item used as a base for items within the grid. |
+
+#### Methods
+Upon enbaling the menu where this screen is attached to. It will scan the given folder for any assets and place these in an array. Next it will populate the grid with eacht asset that was found.
+```csharp
+    private void OnEnable()
+    {
+        GetAssets();
+    }
+
+    private void GetAssets()
+    {
+        string[] data = AssetDatabase.FindAssets("*", new[] { "Assets/Pictures/LevelOne" });
+        
+        foreach (Transform child in Grid.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        foreach (string o in data)
+        {
+            RawImage pic = Instantiate(GridItem, Grid.transform);
+            string PathName = AssetDatabase.GUIDToAssetPath(o);
+            pic.texture = (Texture2D)AssetDatabase.LoadAssetAtPath(PathName, typeof(Texture2D));
+        }
+    }
+```
+
 [Back to main](/index.md)
 
 << [Player Controls](/PlayerControls.md) << >> [Snapshot Handler](/SnapshotHandler.md) >>
