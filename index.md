@@ -10,4 +10,4 @@
 3. [Player Controls](/PlayerControls.md)
 4. [UI](/UI.md)
 5. [Assets used](/Assets.md)
-6. [Snapshot Handler] (/SnapshotHandler.md)
+6. [Snapshot Handler](/SnapshotHandler.md)
