@@ -101,4 +101,4 @@ The `OnPostRender()` renders the taken snapshot and saves the in the correct fol
 
 [Back to main](/index.md)
 
-<< [User Interface](UI.md) <<   >> [Assets used](/Assets.md) >>
+<< [User Interface](UI.md) << >> [Assets used](/Assets.md) >>
