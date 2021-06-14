@@ -3,8 +3,8 @@
 # Player Controls
 
 The player's controls are a relatively simple script, it only has 2 methods:
-- `Start`
-- `Update`
+- `void Start()`
+- `void Update()`
 
 ## PlayerMovement.cs
 
@@ -13,8 +13,6 @@ The player's controls are a relatively simple script, it only has 2 methods:
 | Variable | Explanation |
 
 | :--- | :--- |
-| `float Hsensitivity` | The horizontal sensitivity of the mouse. |
-| `float Vsensitivity` | The vertical sensitivity of the mouse. |
 | `float thrust` | The thrust power the submarine has. |
 
 ### Methods
@@ -22,7 +20,10 @@ The player's controls are a relatively simple script, it only has 2 methods:
 #### Start
 In the `Start()` method there is only one line of code:
 ```csharp
-Cursor.lockState = CursorLockMode.Locked;
+void Start()
+{
+    Cursor.lockState = CursorLockMode.Locked;
+}
 ```
 This line of code keeps the cursor in the middle of the screen while also allowing us to read it's movements, thus preventing it from reaching the border of the screen which would cause problems when turning.
 
