@@ -40,9 +40,13 @@ The `Update()` method gets user input and calls the `TakeSnapshot()` method.
 ```csharp
     private void Update()
     {
-        if(Input.GetAxis("Fire2") != 0)
+        if (!AchievementManager.instance.GetComponent<AchievenmentListIngame>().MenuOpen 
+            && !GameObject.Find("GameMaster").GetComponent<UserInterface>().MenuOpen)
         {
-            TakeSnapshot();
+            if (Input.GetAxis("Fire2") != 0)
+            {
+                TakeSnapshot();
+            }
         }
     }
 ```
