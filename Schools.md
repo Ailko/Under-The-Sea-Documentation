@@ -14,9 +14,9 @@ The schools of fish are split up in 3 seperates scripts:
 | Variable | Explanation |
 
 | :--- | :--- |
-| `GameObject[] fishVariations`	| This is an array of all the different models of fish allow in this school. |
-| `float minSpeed` | Relative minimum speed a fish is allowed to have in this school. |
-| `float maxSpeed` | Relative maximum speed a fish is allowed to have in this school. |
+| `GameObject[] fishVariations`	| This is an array of all the different models of fish allowed in this school. |
+| `float minSpeed` | Relative minimum speed a fish is allowed to have relative to the school. |
+| `float maxSpeed` | Relative maximum speed a fish is allowed to have relative to school. |
 | `float minRotSpeed` | Minimum rotation speed a fish is allowed to have in this school. |
 | `float maxRotSpeed` | Maximum rotation speed a fish is allowed to have in this school. |
 | `float scaleVariance` | The variance in size the fish models are allowed to have. |
@@ -34,12 +34,7 @@ The private `Start()` method consists of two parts:
 - The creation
 - The variable setting
 
-
-We will be discussing both.
-
-
-First, the creation:
-
+##### The creation
 
 This part of the `School.cs` script will create the fishes.
 
@@ -65,18 +60,16 @@ for(int i = 0; i < schoolSize; i++)
 ```
 
 
-It will select a fish variation at random and instantiate this with the Unity `Instantiate<GameObject>(GameObject original, Vector3 position, Quaternion 
-rotation, Transform parent)` method. We will cover each variable of the `Instantiate` function:
+It will select a fish variation at random and instantiate this with the Unity method `Instantiate<GameObject>(GameObject original, Vector3 position, Quaternion 
+rotation, Transform parent)`. We will cover each variable of the `Instantiate` function:
 - `GameObject original`: Here the randomly selected fish variation is passed.
 - `Vector3 position`: The worlposition is a random position relative to the school inside the radius. This is achieved by creating a Vector3 with x, y and z 
-coordinates randomly selected between 0 and 1. This Vector3 is then normalized and multiplied with the radius to keep it inbounds and upscaled as large as is 
-necessary to fill the radius. This is then added to the school's position.
+coordinates randomly selected between 0 and 1. This Vector3 is then normalized and multiplied with the radius to keep the fish in the radius but also allow them to fill the entire space. This is then added to the school's position make it a world position.
 - `Quaternion rotation`: The rotation at initialisation is the same for all the fishes, straight ahead.
-- `Transform parent`: As the parent the school's transform is passed.
+- `Transform parent`: As the parent, the school's transform is passed.
 
 
-The second part of the `Start()` method is used for assigning variables to the SchoolFishScript. It looks a bit daunting but it will be much clearer after 
-the explanation.
+##### The variable setting
 
 
 The code:
@@ -110,7 +103,7 @@ Since there is a possiblity of adding cameras as children of schools of fish for
 
 First we try to get a script with the entered name. If this fails the default script is applied. If a script with that name exists we check if it is a 
 subclass of the base SchoolFishScript, once again, if this fails, the base script is applied. If none of the checks fail the script is added as a component 
-to the fish GameObject.
+to the fish GameObject. This was implemented in case we wanted to add extra child scripts for specific fish behaviours.
 
 
 Then we decide the scale of the fish by multiplying it with a random number between 1 - the determined scale variance and 1 + the determined scale variance.
@@ -154,8 +147,7 @@ private Vector3 NewTarget()
 ```
 
 
-The new target method returns, you guessed it, a new target for the fish. This is achieved by instantiating a Vector3 with random x, y and z coordinates between -1 and 1. This Vector3 is then normalized and multiplied with the 
-radius of the parent (the school) and then multiplied with a random number between 0 and 1 so the target isn't always at the edges of the school.
+The new target method returns, you guessed it, a new target for the fish. This is achieved by instantiating a Vector3 with random x, y and z coordinates between -1 and 1. This Vector3 is then normalized and multiplied with the radius of the parent (the school) and then multiplied with a random number between 0 and 1 so the target isn't always at the edge of the radius.
 
 #### Start
 The `Start()` method in this class is only 1 line long.
@@ -173,7 +165,7 @@ At initialisation the only thing that happens is that the fish is given a first 
 
 #### Update
 
-The `Update()` method exists of multiple sections. First we will show the entire method and then we will discuss the seperate parts:
+The `Update()` method exists of multiple sections. First we will show the entire method and we will then discuss the seperate parts:
 
 ```csharp
 void Update()
@@ -191,27 +183,27 @@ void Update()
 			target = Vector3.zero;
 			timer = moveTimeOut;
 		}
-	
+
 		direction = Vector3.MoveTowards(transform.localPosition, target, speed * Time.deltaTime);
 
 		transform.localPosition = direction;
 
 		if (direction.z > 0)
-			direction.z = -180 + direction.z;
-	
+		direction.z = -180 + direction.z;
+
 		transform.localRotation = Quaternion.Lerp
-			(
-				transform.localRotation,
-				Quaternion.Euler(0, Quaternion.LookRotation(direction).eulerAngles.y + 90, 0),
-				rotSpeed * Time.deltaTime
-			);
+		(
+			transform.localRotation,
+			Quaternion.Euler(0, Quaternion.LookRotation(direction).eulerAngles.y + 90, 0),
+			rotSpeed * Time.deltaTime
+		);
 	}
 	else
 	{
 		timer -= Time.deltaTime;
 		GetComponent<Rigidbody>().AddForce(transform.parent.transform.position - transform.position);
 	}
-		
+
 	if (transform.localPosition.magnitude > GetComponentInParent<School>().schoolRadius)
 		transform.localPosition = transform.localPosition.normalized * GetComponentInParent<School>().schoolRadius;
 }
@@ -226,7 +218,7 @@ if (Vector3.Distance(target, transform.localPosition) < 0.1f)
 	timer = moveTimeOut;
 }
 ```
-The timeout is applied so the faster fishes aren't constantly zipping around the school since this would look rather unnatural.
+The timeout is applied so the faster fishes aren't constantly zipping around the school because this would look rather unnatural.
 
 
 Then a check is performed for wether the fish is in timeout, if it is, the timer will be decreased and a force towards the center of the school is applied.
@@ -243,7 +235,6 @@ if (transform.localPosition.magnitude > GetComponentInParent<School>().schoolRad
 	target = Vector3.zero;
 	timer = moveTimeOut;
 }
-
 ```
 
 Then it's direction is determined. This is the local position it will next move towards.
@@ -258,8 +249,7 @@ transform.localPosition = direction;
 ```
 
 
-If the z direction is larger than 0 it will then be set to the mirrored negative direction. This is done so the fish don't turn around and appear to be swimming in the opposite direction the school is swimming, appearing to swim 
-backwards.
+If the z direction is larger than 0 it will then be set to the mirrored negative direction. This is done so the fish don't turn around and appear to be swimming in the opposite direction the school is swimming, appearing to swim backwards.
 ```csharp
 if (direction.z > 0)
 	direction.z = -180 + direction.z;
