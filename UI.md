@@ -11,11 +11,12 @@ The UI functionality consists of multiple scripts that work together to create a
 
 | :--- | :--- |
 | `string Name` | The name of the clip. |
+| `AudioClip Clip` | The actual sound file. |
 | `float Volume` | The volume the clip will be played at. |
 | `float Pitch` | The pitch the clip will be played at. |
 | `bool Loop` | Whether or not the clip should be played in a loop. |
 | `Type SoundType` | The type of clip (can be Music or SFX). |
-| `AudioSource Source` | The actual sound file. |
+| `AudioSource Source` | The representation of the 3D sound. |
 
 ### AudioManager.cs
 #### Variables
@@ -382,14 +383,24 @@ The `DoAnimation()` method animates each letter independently in sequence:
 | `AudioManager AudioMaster` | The audiomanager. |
 | `Slider Music` | The music slider. |
 | `Slider SFX` | The sfx slider. |
+| `Slider HMouseSense` | The Horizontal mouse sensitivity slider. |
+| `Slider VMouseSense` | The Vertical mouse sensitivity slider. |
 
 #### Methods
 ##### Awake
-The `Awake()` method initialises the title animation:
+The `Awake()` method links the AudioMaster and sets the initial slider values:
 ```csharp
         AudioMaster = GameObject.Find("AudioMaster").GetComponent<AudioManager>();
 
         UpdateSlider();
+        try
+        {
+            updateSensitivity();
+        }
+        catch
+        {
+
+        }
 ```
 
 ##### UpdateSlider
@@ -403,6 +414,13 @@ The `UpdateSlider()` method sets the slidervalues to their correct position corr
         SFX.value = Mathf.Pow(10, (tempVolume / 20));
 ```
 
+##### UpdateSensitivity
+The `UpdateSensitivity()` method sets the slidervalues to their correct position:
+```csharp
+        HMouseSense.value = Globals.Hsensitivity;
+        VMouseSense.value = Globals.Vsensitivity;
+```
+
 ##### SetMusicVolume
 The `SetMusicVolume()` method calls the corresponding function on the audiomanager:
 ```csharp
@@ -413,6 +431,103 @@ The `SetMusicVolume()` method calls the corresponding function on the audiomanag
 The `SetSFXVolume()` method calls the corresponding function on the audiomanager:
 ```csharp
         AudioMaster.SetSFXVolume(volume);
+```
+
+##### Sensitivity
+These methods can be dynamically called to set the sensitivity:
+```csharp
+    public void SetHorizontalSensitivity(float sense)
+    {
+        Globals.Hsensitivity = sense;
+    }
+
+    public void SetVerticalSensitivity(float sense)
+    {
+        Globals.Vsensitivity = sense;
+    }
+```
+
+## UserInterface
+### UserInterface.cs
+#### Variables
+| Variable | Explanation |
+
+| :--- | :--- |
+| `GameObject Menu` | The menu panel. |
+| `bool MenuOpen` | Whether or not the menu is open. |
+| `KeyCode OpenMenuKey` | The key that opens the menu. |
+
+#### Methods
+This simple class opens and closes the given panel at the press of a key that can be selected in the inspector:
+```csharp
+    public void CloseWindow()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        MenuOpen = false;
+        Menu.SetActive(MenuOpen);
+    }
+
+    public void OpenWindow()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        MenuOpen = true;
+        Menu.SetActive(MenuOpen);
+    }
+
+    public void ToggleWindow()
+    {
+        if (MenuOpen)
+        {
+            CloseWindow();
+        }
+        else
+        {
+            OpenWindow();
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(OpenMenuKey))
+        {
+            ToggleWindow();
+        }
+    }
+```
+
+## Grid populator
+### GridPopulator.cs
+#### Variables
+| Variable | Explanation |
+
+| :--- | :--- |
+| `GameObject Grid` | The Grid. |
+| `RawImage GridItem` | The item used as a base for items within the grid. |
+
+#### Methods
+Upon enbaling the menu where this screen is attached to. It will scan the given folder for any assets and place these in an array. Next it will populate the grid with eacht asset that was found.
+```csharp
+    private void OnEnable()
+    {
+        GetAssets();
+    }
+
+    private void GetAssets()
+    {
+        string[] data = AssetDatabase.FindAssets("*", new[] { "Assets/Pictures/LevelOne" });
+        
+        foreach (Transform child in Grid.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        foreach (string o in data)
+        {
+            RawImage pic = Instantiate(GridItem, Grid.transform);
+            string PathName = AssetDatabase.GUIDToAssetPath(o);
+            pic.texture = (Texture2D)AssetDatabase.LoadAssetAtPath(PathName, typeof(Texture2D));
+        }
+    }
 ```
 
 [Back to main](/index.md)

@@ -3,8 +3,8 @@
 # Player Controls
 
 The player's controls are a relatively simple script, it only has 2 methods:
-- `Start`
-- `Update`
+- `void Start()`
+- `void Update()`
 
 ## PlayerMovement.cs
 
@@ -13,8 +13,6 @@ The player's controls are a relatively simple script, it only has 2 methods:
 | Variable | Explanation |
 
 | :--- | :--- |
-| `float Hsensitivity` | The horizontal sensitivity of the mouse. |
-| `float Vsensitivity` | The vertical sensitivity of the mouse. |
 | `float thrust` | The thrust power the submarine has. |
 
 ### Methods
@@ -22,7 +20,10 @@ The player's controls are a relatively simple script, it only has 2 methods:
 #### Start
 In the `Start()` method there is only one line of code:
 ```csharp
-Cursor.lockState = CursorLockMode.Locked;
+void Start()
+{
+    Cursor.lockState = CursorLockMode.Locked;
+}
 ```
 This line of code keeps the cursor in the middle of the screen while also allowing us to read it's movements, thus preventing it from reaching the border of the screen which would cause problems when turning.
 
@@ -33,8 +34,8 @@ void Update()
 {
     if (!AchievementManager.instance.GetComponent<AchievenmentListIngame>().MenuOpen && !GameObject.Find("GameMaster").GetComponent<UserInterface>().MenuOpen)
     {
-        float yaw = transform.eulerAngles.y + Input.GetAxis("Mouse X") * Hsensitivity;
-        float pitch = transform.eulerAngles.x - Input.GetAxis("Mouse Y") * Vsensitivity;
+        float yaw = transform.eulerAngles.y + Input.GetAxis("Mouse X") * Globals.Hsensitivity;
+        float pitch = transform.eulerAngles.x - Input.GetAxis("Mouse Y") * Globals.Vsensitivity;
 
         transform.eulerAngles = new Vector3(pitch, yaw, 0f);
 
@@ -50,13 +51,13 @@ void Update()
 }
 ```
 
-First a check is performed to see if the player is in the achievement or pause screen, if this is the case, no inputs will be processed.
+First a check is performed to see if the player is in the achievement or pause screen, if this is the case, no inputs will be processed. The sensitivities are in the Globals file so the sliders could easily be hooked up to them.
 
 ##### Rotation
 Code:
 ```csharp
-float yaw = transform.eulerAngles.y + Input.GetAxis("Mouse X") * Hsensitivity;
-float pitch = transform.eulerAngles.x - Input.GetAxis("Mouse Y") * Vsensitivity;
+float yaw = transform.eulerAngles.y + Input.GetAxis("Mouse X") * Globals.Hsensitivity;
+float pitch = transform.eulerAngles.x - Input.GetAxis("Mouse Y") * Globals.Vsensitivity;
 
 transform.eulerAngles = new Vector3(pitch, yaw, 0f);
 ```
